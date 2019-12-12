@@ -30,5 +30,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "You can have a look at the demo project you have to build [demo](https://react-shopping-cart-67954.firebaseapp.com/)",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ram-9047/react_shopping_cart.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ram-9047/react_shopping_cart/issues"
+  },
+  "homepage": "https://github.com/ram-9047/react_shopping_cart#readme"
 }

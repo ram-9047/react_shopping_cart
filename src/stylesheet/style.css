@@ -1,0 +1,174 @@
+.wrapper {
+  max-width: 1200px;
+  display: flex;
+  /* padding: 20px 2%; */
+  margin: 50px auto 0;
+}
+.flex {
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: flex-start;
+}
+/* !!!!!!!!!!!!!-----size---!!!!!!!!!!!!! */
+.filter {
+  /* width: 15%; */
+  /* margin-right: 15px; */
+  margin-top: 2px;
+  margin-bottom: 20px;
+  display: block;
+  color: #1b1a20;
+}
+.title {
+  margin-top: 2px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.filter-avail-size {
+  /* display: inline-block; */
+  margin-bottom: 10px;
+}
+.filter-avail-size label {
+  background: #ececec;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  font-size: 0.8em;
+  margin-bottom: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  line-height: 35px;
+  text-align: center;
+}
+.filter-avail-size-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  line-height: 35px;
+  text-align: center;
+  color: #1b1a20;
+  border: 1px solid transparent;
+}
+.checkmark:hover {
+  border: 0.5px solid black;
+}
+.para {
+  font-size: 13px;
+  font-weight: 400;
+  color: grey;
+}
+
+/* !!!!!!!!!!!!!!!!!!!!!!--------------SHOW---PRODUCT-----------------!!!!!!!!!!!!!! */
+
+.product-box {
+  display: flex;
+  flex-wrap: wrap;
+  width: 85%;
+  /* min-height: 600px; */
+}
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sort {
+  margin-left: 38rem;
+  align-items: center;
+}
+.sort-select {
+  padding-left: 1px;
+  margin-left: 3px;
+  /* margin-top: 16px; */
+  height: 20px;
+  border-radius: 5px;
+}
+.product-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+.single-product {
+  position: relative;
+  text-align: center;
+  box-sizing: border-box;
+  width: 25%;
+  margin-bottom: 30px;
+}
+.single-product:hover {
+  border: 0.2px solid rgb(219, 215, 215);
+}
+.single-product:hover .add-btn {
+  background: #eabf00;
+  transition: background-color 0.2s;
+  /* background-color: rgb(255, 255, 58); */
+}
+.free-shipping {
+  position: absolute;
+  color: #ececec;
+  top: 10px;
+  right: 10px;
+  font-size: 10px;
+  background: #1b1a20;
+  cursor: default;
+  padding: 4px 5px;
+}
+.not-free-shipping {
+  opacity: 0;
+  background: white;
+  /* padding: 4px 2px; */
+}
+.product-pic {
+  margin-top: 10px;
+  height: 300px;
+  width: 220px;
+}
+.product-name {
+  position: relative;
+  padding: 0 20px;
+  height: 38px;
+  font-size: 18px;
+  font-weight: 400;
+  cursor: pointer;
+}
+hr {
+  width: 1.5rem;
+  border: 1px solid yellow;
+}
+.product-price {
+  font-size: 24px;
+  font-weight: 700;
+}
+.line {
+  /* text-align: center   ; */
+  /* align-items: center; */
+  /* margin-left: 0rem; */
+  /* height: 2px; */
+  /* width: 10px; */
+  /* background: yellow; */
+}
+.product-emi {
+  color: #777474;
+  margin-bottom: 13px;
+}
+.product-emi-price {
+  font-weight: 700;
+  font-size: 17px;
+}
+.add-btn {
+  margin-top: 10px;
+  margin-bottom: 7px;
+  padding: 14px 60px;
+  background-color: #1b1a20;
+  font-size: 16px;
+  color: white;
+  border: none;
+}
