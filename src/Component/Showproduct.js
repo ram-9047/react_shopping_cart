@@ -5,14 +5,52 @@ class Showproducts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: data
+      data: [...data.products],
+      sortData: "default"
     };
+    // this.sortBy = this.sortBy.bind(this);
   }
-  //   var a = data.products;
-  //   a.sort(function(a, b) {
-  //     return a.price - b.price;
-  //   });
-  //   console.log(a);
+
+  changeState = event => {
+    this.setState({
+      sortData: event.target.value
+    });
+    this.handleSort();
+  };
+
+  sortBy = () => {
+    return this.state.data.sort((a, b) => {
+      console.log(data);
+      return b.price - a.price;
+    });
+  };
+
+  handleSort = () => {
+    switch (this.state.sortData) {
+      case "default":
+        this.setState({
+          data: [...data.products]
+        });
+        break;
+      case "low-to-high":
+        this.setState({
+          data: this.sortBy()
+        });
+        // return <p>hello</p>;
+        break;
+      case "high-to-low":
+        this.setState({
+          data: this.sortBy().reverse()
+        });
+        break;
+      default:
+        this.setState({
+          data: [...data.products]
+        });
+        break;
+    }
+  };
+
   render() {
     return (
       <>
@@ -20,21 +58,17 @@ class Showproducts extends React.Component {
           <div className="product-header">
             <span>16 product(s)found</span>
             <div className="flex sort">
-              {/* <span> */}
               <p>Order by</p>
-              {/* </span> */}
-              {/* <span> */}
-              <select className="sort-select">
-                <option>select</option>
-                <option>Lowest to highest</option>
-                <option>Highest to lowest</option>
+              <select className="sort-select" onChange={this.changeState}>
+                <option value="default">select</option>
+                <option value="low-to-high">Lowest to highest</option>
+                <option value="high-to-low">Highest to lowest</option>
               </select>
-              {/* </span> */}
             </div>
           </div>
 
           <div className="product-flex">
-            {data.products.map(item => (
+            {this.state.data.map(item => (
               <div className="single-product">
                 <div>
                   <span className="">
