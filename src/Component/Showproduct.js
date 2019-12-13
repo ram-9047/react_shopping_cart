@@ -8,7 +8,6 @@ class Showproducts extends React.Component {
       data: [...data.products],
       sortData: "default"
     };
-    // this.sortBy = this.sortBy.bind(this);
   }
 
   changeState = event => {
@@ -20,7 +19,6 @@ class Showproducts extends React.Component {
 
   sortBy = () => {
     return this.state.data.sort((a, b) => {
-      console.log(data);
       return b.price - a.price;
     });
   };
@@ -36,7 +34,6 @@ class Showproducts extends React.Component {
         this.setState({
           data: this.sortBy()
         });
-        // return <p>hello</p>;
         break;
       case "high-to-low":
         this.setState({

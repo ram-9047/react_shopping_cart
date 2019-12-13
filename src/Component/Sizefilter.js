@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function sizefilter() {
+export default function sizefilter(props) {
   return (
     <div>
       <div className="filter">
@@ -12,6 +12,7 @@ export default function sizefilter() {
                 type="checkbox"
                 value="XS"
                 className="filter-avail-size-input"
+                onClick={() => props.handleXS("XS")}
               ></input>
               <span className="checkmark">XS</span>
             </label>
@@ -22,6 +23,7 @@ export default function sizefilter() {
                 type="checkbox"
                 value="S"
                 className="filter-avail-size-input"
+                onClick={() => props.handleXS("S")}
               ></input>
               <span className="checkmark">S</span>
             </label>
@@ -32,6 +34,7 @@ export default function sizefilter() {
                 type="checkbox"
                 value="M"
                 className="filter-avail-size-input"
+                onClick={() => props.handleXS("M")}
               ></input>
               <span className="checkmark">M</span>
             </label>
@@ -42,6 +45,7 @@ export default function sizefilter() {
                 type="checkbox"
                 value="ML"
                 className="filter-avail-size-input"
+                onClick={() => props.handleXS("ML")}
               ></input>
               <span className="checkmark">ML</span>
             </label>
@@ -54,6 +58,7 @@ export default function sizefilter() {
                 type="checkbox"
                 value="L"
                 className="filter-avail-size-input"
+                onClick={() => props.handleXS("L")}
               ></input>
               <span className="checkmark">L</span>
             </label>
@@ -64,6 +69,7 @@ export default function sizefilter() {
                 type="checkbox"
                 value="XL"
                 className="filter-avail-size-input"
+                onClick={() => props.handleXS("XL")}
               ></input>
               <span className="checkmark">XL</span>
             </label>
@@ -74,6 +80,7 @@ export default function sizefilter() {
                 type="checkbox"
                 value="XXL"
                 className="filter-avail-size-input"
+                onClick={() => props.handleXS("XXL")}
               ></input>
               <span className="checkmark">XXL</span>
             </label>
