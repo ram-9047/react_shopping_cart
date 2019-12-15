@@ -3,7 +3,6 @@ import { render } from "react-dom";
 
 import "../src/stylesheet/style.css";
 import data from "../src/data.json";
-// import Items from "../src/Component/items";
 
 class App extends React.Component {
   constructor(props) {
@@ -17,12 +16,49 @@ class App extends React.Component {
     };
   }
 
-  // add to cart
+  //add to cart
   addToCart = item => {
-    console.log(item);
-    this.setState({
-      cart: this.state.cart.concat(item)
-    });
+    if (this.state.cart.length) {
+      var itemQuantIncresed = false;
+      let cartClone = this.state.cart;
+
+      cartClone.forEach(prod => {
+        if (prod.id === item.id) {
+          prod.quantity++;
+          itemQuantIncresed = true;
+        }
+      });
+
+      if (!itemQuantIncresed) {
+        cartClone.push({ ...item, quantity: 1 });
+      }
+
+      this.setState({ cart: cartClone });
+    } else {
+      this.setState({ cart: [{ ...item, quantity: 1 }] });
+    }
+  };
+  //delete item from cart
+
+  deleteItem = item => {
+    let delCart = Object.assign([], this.state.cart);
+    delCart.splice(item, 1);
+    this.setState({ cart: delCart });
+  };
+  // decrese quantity
+  decreaseQuantity = item => {
+    // let cartProd = this.state.cart;
+    // cartProd.find(prod => {
+    //   if (prod.id === item.id) {
+    //     prod.quantity = prod.quantity - 1;
+    //   }
+    // });
+    // this.setState({ cart: cartProd });
+    let copyCart = Object.assign([], this.state.cart);
+    if (copyCart.find(item.id)) {
+      copyCart.quantity = copyCart.quantity - 1;
+    }
+    this.setState({ cart: copyCart });
   };
 
   //manage cart
@@ -45,6 +81,11 @@ class App extends React.Component {
     this.setState({ filterData });
   };
 
+  //
+
+  subTotal = () => {
+    this.state.cart.reduce((acc, item) => acc + item.price, 0);
+  };
   // sorting data
 
   changeState = event => {
@@ -88,6 +129,7 @@ class App extends React.Component {
   render() {
     const { data, filterData } = this.state;
     const mylist = filterData.length ? filterData : data;
+    console.log(this.state.cart);
     return (
       <>
         <div className="wrapper">
@@ -262,7 +304,7 @@ class App extends React.Component {
                 <div className=".cart-single-item ">
                   <hr className="cart-bar"></hr>
                   <div className="selected-items-box">
-                    <div className="delete-item">
+                    <div className="delete-item" onClick={this.deleteItem}>
                       {/* <img
                         src="https://image.flaticon.com/icons/png/512/32/32178.png"
                         alt="del-icon"
@@ -278,13 +320,19 @@ class App extends React.Component {
                     <div className="selected-items-details">
                       <p className="items-title">{item.title}</p>
                       <p className="description">
-                        size <br quantity />
+                        {item.availableSizes[0]} | {item.style} <br />
+                        Quantity: {item.quantity}
                       </p>
                     </div>
                     <div className="selected-items-price">
-                      <p>${item.price}</p>
+                      <p>${item.price * item.quantity}</p>
                       <div>
-                        <button className="decrease-item-btn">-</button>
+                        <button
+                          className="decrease-item-btn"
+                          onClick={this.decreaseQuantity}
+                        >
+                          -
+                        </button>
                         <button className="increase-item-btn">+</button>
                       </div>
                     </div>
@@ -298,7 +346,11 @@ class App extends React.Component {
                 <div className="cart-total-price">
                   <p className="cart-total-price-value">
                     $
-                    {this.state.cart.reduce((acc, item) => acc + item.price, 0)}
+                    {this.state.cart.reduce(
+                      (acc, item) => acc + item.price * item.quantity,
+                      0
+                    )}
+                    {/* {this.subTotal(item)} */}
                   </p>
                   <small className="cart-total-price-installment">
                     <span>OR UPTO 9 X $ 2.34</span>
