@@ -50,17 +50,33 @@ class App extends React.Component {
     // let cartProd = this.state.cart;
     // cartProd.find(prod => {
     //   if (prod.id === item.id) {
-    //     prod.quantity = prod.quantity - 1;
+    //     if (prod.quantity > 1) {
+    //       prod.quantity = prod.quantity - 1;
+    //     }
     //   }
     // });
     // this.setState({ cart: cartProd });
-    let copyCart = Object.assign([], this.state.cart);
-    if (copyCart.find(item.id)) {
-      copyCart.quantity = copyCart.quantity - 1;
-    }
-    this.setState({ cart: copyCart });
+    // !!!!!!!!!!!!!!!!!!!!!!!!!---------------second method
+    // let copyCart = Object.assign([], this.state.cart);
+    let copyCart = this.state.cart;
+    copyCart.forEach(prod => {
+      if (prod.id === item.id) {
+        if (prod.quantity > 1) {
+          prod.quantity = prod.quantity - 1;
+        }
+      }
+    });
+    return this.setState({ cart: copyCart });
   };
-
+  addQuantity = item => {
+    let cartProd = this.state.cart;
+    cartProd.find(prod => {
+      if (prod.id === item.id) {
+        prod.quantity = prod.quantity + 1;
+      }
+    });
+    this.setState({ cart: cartProd });
+  };
   //manage cart
   manageCart = () => {
     this.setState(
@@ -300,7 +316,7 @@ class App extends React.Component {
               </div>
 
               {/* mapp these  */}
-              {this.state.cart.map(item => (
+              {this.state.cart.map(cartItem => (
                 <div className=".cart-single-item ">
                   <hr className="cart-bar"></hr>
                   <div className="selected-items-box">
@@ -312,28 +328,33 @@ class App extends React.Component {
                     </div>
                     <div className="selected-items-image">
                       <img
-                        src={`static/products/${item.sku}_1.jpg`}
-                        alt={item.title}
+                        src={`static/products/${cartItem.sku}_1.jpg`}
+                        alt={cartItem.title}
                         className="item-image"
                       ></img>
                     </div>
                     <div className="selected-items-details">
-                      <p className="items-title">{item.title}</p>
+                      <p className="items-title">{cartItem.title}</p>
                       <p className="description">
-                        {item.availableSizes[0]} | {item.style} <br />
-                        Quantity: {item.quantity}
+                        {cartItem.availableSizes[0]} | {cartItem.style} <br />
+                        Quantity: {cartItem.quantity}
                       </p>
                     </div>
                     <div className="selected-items-price">
-                      <p>${item.price * item.quantity}</p>
+                      <p>${cartItem.price * cartItem.quantity}</p>
                       <div>
                         <button
                           className="decrease-item-btn"
-                          onClick={this.decreaseQuantity}
+                          onClick={() => this.decreaseQuantity(cartItem)}
                         >
                           -
                         </button>
-                        <button className="increase-item-btn">+</button>
+                        <button
+                          className="increase-item-btn"
+                          onClick={() => this.addQuantity(cartItem)}
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
                   </div>
