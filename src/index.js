@@ -21,6 +21,7 @@ class App extends React.Component {
     if (this.state.cart.length) {
       var itemQuantIncresed = false;
       let cartClone = this.state.cart;
+      // let cartClone = Object.assign([], this.state.cart);
 
       cartClone.forEach(prod => {
         if (prod.id === item.id) {
@@ -47,26 +48,26 @@ class App extends React.Component {
   };
   // decrese quantity
   decreaseQuantity = item => {
-    // let cartProd = this.state.cart;
-    // cartProd.find(prod => {
-    //   if (prod.id === item.id) {
-    //     if (prod.quantity > 1) {
-    //       prod.quantity = prod.quantity - 1;
-    //     }
-    //   }
-    // });
-    // this.setState({ cart: cartProd });
-    // !!!!!!!!!!!!!!!!!!!!!!!!!---------------second method
-    // let copyCart = Object.assign([], this.state.cart);
-    let copyCart = this.state.cart;
-    copyCart.forEach(prod => {
+    let cartProd = this.state.cart;
+    cartProd.find(prod => {
       if (prod.id === item.id) {
         if (prod.quantity > 1) {
-          prod.quantity = prod.quantity - 1;
+          return (prod.quantity = prod.quantity - 1);
         }
       }
     });
-    return this.setState({ cart: copyCart });
+    this.setState({ cart: cartProd });
+    // !!!!!!!!!!!!!!!!!!!!!!!!!---------------second method
+    // let copyCart = Object.assign([], this.state.cart);
+    //   let copyCart = this.state.cart;
+    //   copyCart.forEach(prod => {
+    //     if (prod.id === item.id) {
+    //       if (prod.quantity > 1) {
+    //         prod.quantity = prod.quantity - 1;
+    //       }
+    //     }
+    //   });
+    //   return this.setState({ cart: copyCart });
   };
   addQuantity = item => {
     let cartProd = this.state.cart;
@@ -89,12 +90,27 @@ class App extends React.Component {
 
   // filtering data
   handleSize = size => {
-    console.log("handle", size);
-    const filterData = this.state.data.filter(singleData => {
-      return singleData.availableSizes.includes(size);
+    // console.log("handle", size);
+    // const filterData = this.state.data.filter(singleData => {
+    //   return singleData.availableSizes.includes(size);
+    // });
+    // console.log(filterData);
+    // this.setState({ filterData });
+    if (!this.state.filterData.includes(size)) {
+      this.setState({
+        filterData: [...this.state.filterData, size]
+      });
+      // this.handleFilter();
+    }
+  };
+
+  handleFilter = () => {
+    let filterClone = this.state.data;
+    return filterClone.filter(item => {
+      return this.state.filterData.some(size =>
+        item.availableSizes.includes(size)
+      );
     });
-    console.log(filterData);
-    this.setState({ filterData });
   };
 
   //
@@ -144,8 +160,8 @@ class App extends React.Component {
 
   render() {
     const { data, filterData } = this.state;
-    const mylist = filterData.length ? filterData : data;
-    console.log(this.state.cart);
+    const mylist = filterData.length ? this.handleFilter() : data;
+    console.log(mylist);
     return (
       <>
         <div className="wrapper">
@@ -199,6 +215,7 @@ class App extends React.Component {
                   </label>
                 </div>
               </div>
+              {/* !!!!!!!!!!!!!! */}
               <div className="flex">
                 <div className="filter-avail-size">
                   <label>
@@ -234,6 +251,7 @@ class App extends React.Component {
                   </label>
                 </div>
               </div>
+              {/* !!!!!!!!!!!!!-------------------------------!!!!!!!!!!!!!!!!!!!!!!!!!! */}
               <div className="para">
                 <p>Leave a star on Github if this repository was useful :</p>
               </div>
